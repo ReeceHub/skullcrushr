@@ -1,13 +1,18 @@
-import pytest
 from selenium import webdriver
+import unittest
 
-@pytest.fixture(scope="module")
-def driver():
-    driver = webdriver.Firefox()
-    yield driver
-    driver.close()
-    driver.quit()
+class TestNewVisitor(unittest.TestCase):
 
-def test_page_loads(driver):
-    driver.get('http://localhost:8000')
-    assert 'Django' in driver.title
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_page_loads(self):
+        self.driver.get('http://localhost:8000')
+
+        self.assertIn('Django', self.driver.title)
+
+if __name__ == '__main__':
+    unittest.main()
