@@ -9,10 +9,10 @@ class TestNewVisitor(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def test_page_loads(self):
-        self.driver.get('http://localhost:8000')
+    def test_polls_page_loads(self):
+        self.driver.get('http://localhost:8000/polls')
 
-        self.assertIn('Django', self.driver.title)
+        self.assertIn('Hello, world.', self.driver.page_source)
 
 if __name__ == '__main__':
     unittest.main()
